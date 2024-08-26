@@ -84,10 +84,10 @@
       {%endif%}
     ];
     {%endif%}
-
+    
     {%if json_content.mobility_themes%}
     {% for mtheme in json_content.mobility_themes %}
-	  mobilitydcatap:mobilityTheme mtheme:{{mtheme | lower | replace(" ", "-") | replace("," , "")}};
+    mobilitydcatap:mobilityTheme mtheme:{{mtheme | lower | replace(" ", "-") | replace("," , "")}};
     {% endfor %}
     {%endif%}
     {%if '://' in json_content.spatial_coverage %}
@@ -128,7 +128,7 @@
   {{asset_id | safe}} dcat:distribution {{distribution_id | safe}} .
 
   {{distribution_id | safe}} rdf:type dcat:Distribution;
-	  mobilitydcatap:mobilityDataStandard mdata:{{distribution.data_schema | lower | replace(" ", "-")}} ;
+    mobilitydcatap:mobilityDataStandard mdata:{{distribution.data_schema | lower | replace(" ", "-")}} ;
     {% if '://' in json_content.spatial_coverage %}
     dct:format <{{distribution.format}}>;
     {%else%}
