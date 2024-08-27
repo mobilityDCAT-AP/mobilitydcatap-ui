@@ -14,7 +14,7 @@ const router= new Router({
             name: 'asset_create',
             component: AssetCreate,
             props: {
-                asset_type : 'mobilityDCAT-AP'
+                asset_type : 'mobilityDCAT-AP UI'
             },
             meta: {
                 title: "Cefriel RDF Metadata Generator",
