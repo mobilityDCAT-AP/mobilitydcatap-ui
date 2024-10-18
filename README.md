@@ -1,10 +1,10 @@
 # mobilityDCAT-AP Generator Tool
 
-Generate [mobilityDCAT-AP](https://w3id.org/mobilitydcat-ap/) metadata in RDF using a form-based interface. Test and experiment with different metadata to learn how different information are described according to the mobilityDCAT-AP specification.
+Generate [mobilityDCAT-AP](https://w3id.org/mobilitydcat-ap/) metadata in RDF using a form-based interface. Test and experiment with different metadata to learn how different information are described according to the mobilityDCAT-AP specification. The form is compliant with the minimum profile of mobilityDCAT-AP.
 
-The form is compliant with the minimum profile of mobilityDCAT-AP.
+▶️ Visit the webpage at: https://mobilitydcat-ap.github.io/mobilitydcatap-ui/
 
-Visit the webpage at: https://mobilitydcat-ap.github.io/mobilitydcatap-ui/
+🛠️ Developed by [Cefriel](https://www.cefriel.com/) using [cefriel/rapid-triples](https://github.com/cefriel/rapid-triples).
 
 ### Run it locally
 
