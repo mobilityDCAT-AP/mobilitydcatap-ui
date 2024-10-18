@@ -2,7 +2,7 @@
 {%- set dcat_content = obj.header -%}
 {%- set json_content = obj.content -%}
 {%- set asset_name = slugify(dcat_content.name) -%}
-{%- set asset_type = dcat_content.type -%}
+{%- set asset_type = "MobilityDataset" -%}
 {%- set asset_id = '<' + prefix + asset_type + '#' + asset_name + '>' -%}
 {%- set catalogue_id= '<' + prefix + 'CefrielDataCatalogue#' + asset_type + '>' -%}
 {%- set catalogue_record_id = '<' + prefix + 'CefrielDataCatalogueRecord/' + asset_type + '#' + asset_name + '>' -%}
