@@ -5,8 +5,7 @@
     <v-row class="px-10 my-2">
         <v-col cols="8" class="py-2">
             <p><b>Fill the form with all the metadata and download the RDF</b> representation using <a href="https://w3id.org/mobilitydcat-ap/">mobilityDCAT-AP</a>. Test and experiment to learn how different information should be described in RDF according to the mobilityDCAT-AP specification. The form is compliant with the minimum profile required by mobilityDCAT-AP.<br><br>
-            The page is client-side only so all the information inserted are not collected/stored but can not be retrieved if the page is reloaded. The output RDF can be converted to different serializations using online converters such as <a href="https://rdfshape.weso.es/dataConvert">RDFShape</a>.<br><br>
-            This page is powered by <b>KCONG (Knowledge Catalogue and Governance)</b> a complete (meta)data catalogue solution developed by <a href="https://www.cefriel.com/">Cefriel</a>. If you want to know more visit <a href="https://kcong.cefriel.com/">https://kcong.cefriel.com/</a>.</p>
+            This page is powered by <b>KCONG (Knowledge Catalogue and Governance)</b> a complete (meta)data catalogue solution developed by <a href="https://www.cefriel.com/">Cefriel</a>. If you want to know more visit <a href="https://kcong.cefriel.com/">https://kcong.cefriel.com/</a>. The page is client-side only so all the information inserted are not collected/stored and can not be retrieved if the page is reloaded.</p>
         </v-col>
         <v-col cols="4" class="text-center py-2">
             <img src="@/assets/logo.png" alt="Company Logo" style="max-height: 100px;">
