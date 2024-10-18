@@ -4,7 +4,7 @@ Generate [mobilityDCAT-AP](https://w3id.org/mobilitydcat-ap/) metadata in RDF us
 
 The form is compliant with the minimum profile of mobilityDCAT-AP.
 
-Visit the webpage at: https://cefriel.github.io/mobilitydcatap-ui
+Visit the webpage at: https://mobilitydcat-ap.github.io/mobilitydcatap-ui/
 
 ### Run it locally
 
