@@ -1,0 +1,138 @@
+﻿{%- set prefix="https://knowledge.c-innovationhub.com/cefriel/data/" -%}
+{%- set dcat_content = obj -%}
+{%- set json_content = obj -%}
+{%- set asset_name = slugify(dcat_content.name) -%}
+{%- set asset_type = "MobilityDataset" -%}
+{%- set asset_id = '<' + prefix + asset_type + '#' + asset_name + '>' -%}
+{%- set catalogue_id= '<' + prefix + 'CefrielDataCatalogue#' + asset_type + '>' -%}
+{%- set catalogue_record_id = '<' + prefix + 'CefrielDataCatalogueRecord/' + asset_type + '#' + asset_name + '>' -%}
+{%- set asset_type_url = data_platform_url + '/assets/' + asset_name -%}
+
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix vcard: <http://www.w3.org/2006/vcard/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix mobilitydcatap: <https://w3id.org/mobilitydcat-ap#> .
+
+
+{{catalogue_id | safe}} rdf:type dcat:Catalog;
+dcterms:title "Cefriel RDF Metadata Generator for mobilityDCAT-AP";
+dcterms:description "Cefriel RDF Metadata Generator for mobilityDCAT-AP powered by KCONG"@en;
+dcterms:publisher [
+    rdf:type foaf:Agent;
+    foaf:name "Mobility Data Publisher";
+    foaf:mbox "no-reply@cefriel.com";
+];
+dcterms:dataset {{asset_id | safe}};
+dcat:record {{catalogue_record_id | safe}};
+foaf:homepage <https://kcong.cefriel.com/>.
+
+
+{{catalogue_record_id | safe}} rdf:type dcat:CatalogRecord ;
+dcterms:identifier "{{obj.id}}" ;
+dcterms:modified "{{obj.modified}}"^^xsd:dateTime ;
+dcterms:created "{{obj.created}}"^^xsd:dateTime ;
+foaf:primaryTopic {{asset_id  | safe}} .
+
+
+{{asset_id | safe}}
+    dcterms:identifier """{{dcat_content.identifier}}""";
+    dcterms:title "{{dcat_content.name}}";
+    dcterms:description """{{dcat_content.description}}""";
+    {%if dcat_content.publisher_name or dcat_content.publisher_email %}
+    dcterms:publisher [
+    rdf:type foaf:Agent;
+      {%if dcat_content.publisher_name %}
+    foaf:name "{{dcat_content.publisher_name}}";
+      {%endif%}
+      {%if dcat_content.publisher_email %}
+    foaf:mbox "{{dcat_content.publisher_email}}";
+      {%endif%}
+    ];
+    {%endif%}
+
+    {%- set category_themes = json_content.mobility_theme_category if json_content.mobility_theme_category else [] -%}
+    {%- set subcategory_themes = json_content.mobility_theme_subcategory if json_content.mobility_theme_subcategory else [] -%}
+    {%- for theme in category_themes -%}
+    {%- set theme_iri = vocab_map.mobility_themes[theme] if theme and '://' not in theme else theme -%}
+    {%- if theme_iri %}
+    mobilitydcatap:mobilityTheme <{{theme_iri}}>;
+    {%- endif -%}
+    {%- endfor -%}
+    {%- for theme in subcategory_themes -%}
+    {%- set theme_iri = vocab_map.mobility_themes[theme] if theme and '://' not in theme else theme -%}
+    {%- if theme_iri %}
+    mobilitydcatap:mobilityTheme <{{theme_iri}}>;
+    {%- endif -%}
+    {%- endfor -%}
+
+    {%if '://' in json_content.spatial_coverage %}
+    dcat:spatial <{{json_content.spatial_coverage}}>;
+    {%else%}
+    dcat:spatial """{{json_content.spatial_coverage}}""";
+    {%endif%}
+
+    {%if json_content.spatial_aggregation%}
+    dcat:spatialResolutionInMeters """{{json_content.spatial_aggregation}}""";
+    {%endif%}
+
+    {%if json_content.temporal_coverage_start or json_content.temporal_coverage_end%}
+    dcat:temporal [ a dcterms:PeriodOfTime;
+      {%if json_content.temporal_coverage_start%}
+    dcat:startDate """{{json_content.temporal_coverage_start}}""";
+      {%endif%}
+      {%if json_content.temporal_coverage_end%}
+    dcat:endDate """{{json_content.temporal_coverage_end}}""";
+      {%endif%}
+    ];
+    {%endif%}
+
+    {%if json_content.temporal_aggregation%}
+    dcat:temporalResolution """{{json_content.temporal_aggregation}}""";
+    {%endif%}
+
+    {%- if json_content.source_asset and json_content.source_asset.id -%}
+    dcterms:source <{{json_content.source_asset.id}}>;
+    {%- endif -%}
+
+    {%- set accrual_periodicity_iri = vocab_map.accrual_periodicity[json_content.accrual_periodicity] if json_content.accrual_periodicity and '://' not in json_content.accrual_periodicity else json_content.accrual_periodicity -%}
+    {%- if accrual_periodicity_iri %}
+    dcat:accrualPeriodicity <{{accrual_periodicity_iri}}>.
+    {%- endif %}
+
+    rdf:type dcat:Dataset .
+
+
+  {%if json_content.distributions %}
+  {%- for distribution in json_content.distributions -%}
+  {%- set distribution_id = '<' + prefix + asset_type + '/Distribution#' + asset_name + '-' + loop.index + '>' -%}
+  {{asset_id | safe}} dcat:distribution {{distribution_id | safe}} .
+
+  {{distribution_id | safe}} rdf:type dcat:Distribution;
+    {%- set data_schema_iri = vocab_map.mobility_data_standard[distribution.data_schema] if distribution.data_schema and '://' not in distribution.data_schema else distribution.data_schema -%}
+    {%- if data_schema_iri %}
+    mobilitydcatap:mobilityDataStandard <{{data_schema_iri}}> ;
+    {%- endif %}
+    {%- set format_iri = vocab_map.file_type[distribution.format] if distribution.format and '://' not in distribution.format else distribution.format -%}
+    {%- if format_iri and '://' in format_iri %}
+    dcterms:format <{{format_iri}}>;
+    {%- elif format_iri %}
+    dcterms:format "{{format_iri}}";
+    {%- endif %}
+  {%-if json_content.data_sample -%}
+    {%- for sample in json_content.data_sample -%}
+    adms:sample [
+      rdf:type dcat:Distribution;
+      dcat:downloadURL <{{sample.url}}>;
+      {%-if sample.sample_description -%}
+      dcterms:description """{{sample.sample_description}}"""
+      {%- endif -%}
+    ];
+    {%- endfor -%}
+  {%- endif -%}
+dcat:accessURL <{{distribution.access_url}}> .
+  {%- endfor -%}
+  {%- endif -%}

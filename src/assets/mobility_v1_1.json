@@ -1,0 +1,169 @@
+﻿{
+  "type": "object",
+  "properties": {
+    "identifier": {
+      "type": "string",
+      "title": "Identifier",
+      "description": "Identifier of the data source.",
+      "default": "MY_DATASOURCE"
+    },
+    "name": {
+      "type": "string",
+      "title": "Name",
+      "description": "Name of the data source",
+      "default": "My Data Source"
+    },
+    "description": {
+      "type": "string",
+      "title": "Description",
+      "layout": "textarea",
+      "description": "Description of the data contained in the data source",
+      "default": "My Data Source contains mobility data about mobility things."
+    },
+    "publisher_name": {
+      "type": "string",
+      "title": "Publisher name",
+      "description": "Name of the entity providing the data source",
+      "default": "Cefriel Data Publisher",
+      "layout": { "cols": 6 }
+    },
+    "publisher_email": {
+      "title": "Publisher email",
+      "type": "string",
+      "format": "email",
+      "description": "Email of the entity providing the data source",
+      "default": "no-reply@cefriel.com",
+      "layout": { "cols": 6 }
+    },
+    "id": {
+      "type": "string",
+      "title": "ID",
+      "readOnly": true
+    },
+    "created": {
+      "type": "string",
+      "title": "Creation date",
+      "readOnly": true
+    },
+    "modified": {
+      "type": "string",
+      "title": "Last updated",
+      "readOnly": true
+    },
+    "type": {
+      "type": "string",
+      "title": "Type",
+      "readOnly": true
+    },
+    "mobility_theme_category": {
+      "title": "Mobility theme category",
+      "description": "Categories describing the data in the data source. Select from the <a href='https://w3id.org/mobilitydcat-ap/mobility-theme' target='_blank' rel='noopener noreferrer'>mobilitydcatap:mobilityTheme</a> vocabulary.",
+      "type": "array",
+      "minItems": 1,
+      "errorMessage": {
+        "minItems": "Select at least one value"
+      },
+      "items": {
+        "type": "string"
+      },
+      "layout": {
+        "comp": "combobox",
+        "getItems": {
+          "expr": "context.vocabularies.mobility_themes.filter(item => (item.broaderIris.includes('https://w3id.org/mobilitydcat-ap/mobility-theme/data-content-category')))",
+          "itemsResults": "data",
+          "itemTitle": "data.label",
+          "itemValue": "data.label",
+          "itemKey": "data.iri"
+        }
+      }
+    },
+    "mobility_theme_subcategory": {
+      "title": "Mobility theme subcategory",
+      "description": "Subcategories associated with the selected categories. Select from the <a href='https://w3id.org/mobilitydcat-ap/mobility-theme' target='_blank' rel='noopener noreferrer'>mobilitydcatap:mobilityTheme</a> vocabulary.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "layout": {
+        "if": {
+          "expr": "rootData && Array.isArray(rootData.mobility_theme_category) && rootData.mobility_theme_category.length > 0 && context.vocabularies.mobility_themes.filter(item => context.vocabularies.mobility_themes.some(category => rootData.mobility_theme_category.includes(category.label) && ((Array.isArray(item.broaderIris) && item.broaderIris.includes(category.iri))))).length > 0"
+        },
+        "comp": "combobox",
+        "getItems": {
+          "expr": "rootData && Array.isArray(rootData.mobility_theme_category) ? context.vocabularies.mobility_themes.filter(item => context.vocabularies.mobility_themes.some(category => rootData.mobility_theme_category.includes(category.label) && ((Array.isArray(item.broaderIris) && item.broaderIris.includes(category.iri))))) : []",
+          "itemsResults": "data",
+          "itemTitle": "data.label",
+          "itemValue": "data.label",
+          "itemKey": "data.iri"
+        }
+      }
+    },
+    "accrual_periodicity": {
+      "title": "Accrual periodicity",
+      "description": "How often the content of the data source is updated. Uses the EU Publications Office frequency authority vocabulary.",
+      "type": "string",
+      "layout": {
+        "comp": "combobox",
+        "getItems": {
+          "expr": "context.vocabularies.accrual_periodicity",
+          "itemsResults": "data",
+          "itemTitle": "data.label",
+          "itemValue": "data.label",
+          "itemKey": "data.iri"
+        }
+      }
+    },
+    "spatial_coverage": {
+      "type": "string",
+      "default": "http://publications.europa.eu/resource/authority/country/ITA",
+      "description": "The geographical coverage of the data in the data source (IRI or free text).",
+      "title": "Area covered"
+    },
+    "distributions": {
+      "title": "Distributions",
+      "description": "A specific representation of the dataset (dcat:Distribution).",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "data_schema": {
+            "title": "Data schema/model",
+            "description": "The data schema/model adopted to represent the data. Select from the mobilitydcatap:mobilityDataStandard vocabulary.",
+            "type": "string",
+            "layout": {
+              "comp": "combobox",
+              "getItems": {
+                "expr": "context.vocabularies.mobility_data_standard",
+                "itemsResults": "data",
+                "itemTitle": "data.label",
+                "itemValue": "data.label",
+                "itemKey": "data.iri"
+              }
+            }
+          },
+          "format": {
+            "type": "string",
+            "title": "Resource format",
+            "description": "The format used to encode the data. Uses the EU Publications Office file-type authority vocabulary.",
+            "layout": {
+              "comp": "combobox",
+              "getItems": {
+                "expr": "context.vocabularies.file_type",
+                "itemsResults": "data",
+                "itemTitle": "data.label",
+                "itemValue": "data.label",
+                "itemKey": "data.iri"
+              }
+            }
+          },
+          "access_url": {
+            "type": "string",
+            "title": "Access URL",
+            "description": "URL redirecting to a webpage or an endpoint to access the data.",
+            "default": "http://www.cefriel.com/data/my_data_source"
+          }
+        }
+      }
+    }
+  }
+}

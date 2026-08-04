@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Subset of the EU Publications Office file-type authority vocabulary,
+  covering formats most commonly used for mobility data distributions.
+  Full vocabulary: http://publications.europa.eu/resource/dataset/file-type
+-->
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:skos="http://www.w3.org/2004/02/skos/core#">
+
+  <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/file-type/CSV">
+    <skos:prefLabel xml:lang="en">CSV</skos:prefLabel>
+  </skos:Concept>
+
+  <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/file-type/JSON">
+    <skos:prefLabel xml:lang="en">JSON</skos:prefLabel>
+  </skos:Concept>
+
+  <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/file-type/JSON_LD">
+    <skos:prefLabel xml:lang="en">JSON-LD</skos:prefLabel>
+  </skos:Concept>
+
+  <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/file-type/XML">
+    <skos:prefLabel xml:lang="en">XML</skos:prefLabel>
+  </skos:Concept>
+
+  <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/file-type/GEOJSON">
+    <skos:prefLabel xml:lang="en">GeoJSON</skos:prefLabel>
+  </skos:Concept>
+
+  <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/file-type/ZIP">
+    <skos:prefLabel xml:lang="en">ZIP</skos:prefLabel>
+  </skos:Concept>
+
+  <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/file-type/GTFS">
+    <skos:prefLabel xml:lang="en">GTFS</skos:prefLabel>
+  </skos:Concept>
+
+  <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/file-type/PROTOBUF">
+    <skos:prefLabel xml:lang="en">Protocol Buffers</skos:prefLabel>
+  </skos:Concept>
+
+  <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/file-type/RDF_XML">
+    <skos:prefLabel xml:lang="en">RDF/XML</skos:prefLabel>
+  </skos:Concept>
+
+  <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/file-type/RDF_TURTLE">
+    <skos:prefLabel xml:lang="en">Turtle</skos:prefLabel>
+  </skos:Concept>
+
+  <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/file-type/HTML">
+    <skos:prefLabel xml:lang="en">HTML</skos:prefLabel>
+  </skos:Concept>
+
+  <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/file-type/PDF">
+    <skos:prefLabel xml:lang="en">PDF</skos:prefLabel>
+  </skos:Concept>
+
+</rdf:RDF>

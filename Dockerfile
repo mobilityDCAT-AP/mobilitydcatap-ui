@@ -1,11 +1,11 @@
-# DEPLOY
-FROM nginx:1.16.0-alpine
+FROM node:22 AS build
+WORKDIR /app
+COPY package.json package-lock.json ./
+RUN npm ci
+COPY . .
+RUN npm run build-only
 
-# copy artifact build from the 'build environment'
-COPY dist /usr/share/nginx/html/
-
-# expose port 80
+FROM nginx:1.27-alpine
+COPY --from=build /app/dist /usr/share/nginx/html/mobilitydcatap-ui/
 EXPOSE 80
-
-# run nginx
 CMD ["nginx", "-g", "daemon off;"]

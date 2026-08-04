@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Accrual periodicity vocabulary for mobilityDCAT-AP.
+  All terms now reference the EU Publications Office frequency authority vocabulary.
+  Fine-grained terms formerly in the deprecated https://w3id.org/mobilitydcat-ap/update-frequency/
+  namespace have been migrated to their skos:exactMatch equivalents in the EU authority.
+-->
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:skos="http://www.w3.org/2004/02/skos/core#">
+
+  <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/frequency/UPDATE_CONT">
+    <skos:prefLabel xml:lang="en">Continuously</skos:prefLabel>
+  </skos:Concept>
+
+  <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/frequency/NEVER">
+    <skos:prefLabel xml:lang="en">Never (one-time provision)</skos:prefLabel>
+  </skos:Concept>
+
+  <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/frequency/IRREG">
+    <skos:prefLabel xml:lang="en">On occurrence / irregularly</skos:prefLabel>
+  </skos:Concept>
+
+  <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/frequency/1MIN">
+    <skos:prefLabel xml:lang="en">Up to 1min</skos:prefLabel>
+  </skos:Concept>
+
+  <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/frequency/5MIN">
+    <skos:prefLabel xml:lang="en">Up to 5min</skos:prefLabel>
+  </skos:Concept>
+
+  <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/frequency/10MIN">
+    <skos:prefLabel xml:lang="en">Up to 10 min</skos:prefLabel>
+  </skos:Concept>
+
+  <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/frequency/15MIN">
+    <skos:prefLabel xml:lang="en">Up to 15 min</skos:prefLabel>
+  </skos:Concept>
+
+  <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/frequency/30MIN">
+    <skos:prefLabel xml:lang="en">Up to 30 min</skos:prefLabel>
+  </skos:Concept>
+
+  <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/frequency/HOURLY">
+    <skos:prefLabel xml:lang="en">Up to 1h</skos:prefLabel>
+  </skos:Concept>
+
+  <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/frequency/BIHOURLY">
+    <skos:prefLabel xml:lang="en">Up to 2h</skos:prefLabel>
+  </skos:Concept>
+
+  <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/frequency/TRIHOURLY">
+    <skos:prefLabel xml:lang="en">Up to 3h</skos:prefLabel>
+  </skos:Concept>
+
+  <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/frequency/12HRS">
+    <skos:prefLabel xml:lang="en">Up to 12h</skos:prefLabel>
+  </skos:Concept>
+
+  <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/frequency/DAILY">
+    <skos:prefLabel xml:lang="en">Up to 24h</skos:prefLabel>
+  </skos:Concept>
+
+  <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/frequency/WEEKLY">
+    <skos:prefLabel xml:lang="en">Up to Weekly</skos:prefLabel>
+  </skos:Concept>
+
+  <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/frequency/MONTHLY">
+    <skos:prefLabel xml:lang="en">Up to Monthly</skos:prefLabel>
+  </skos:Concept>
+
+  <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/frequency/BIMONTHLY">
+    <skos:prefLabel xml:lang="en">Up to every 2 months</skos:prefLabel>
+  </skos:Concept>
+
+  <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/frequency/QUARTERLY">
+    <skos:prefLabel xml:lang="en">Up to every 3 months</skos:prefLabel>
+  </skos:Concept>
+
+  <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/frequency/ANNUAL_2">
+    <skos:prefLabel xml:lang="en">Up to every 6 months</skos:prefLabel>
+  </skos:Concept>
+
+  <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/frequency/ANNUAL">
+    <skos:prefLabel xml:lang="en">Up to Annual</skos:prefLabel>
+  </skos:Concept>
+
+  <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/frequency/BIENNIAL">
+    <skos:prefLabel xml:lang="en">Up to Biennial</skos:prefLabel>
+  </skos:Concept>
+
+  <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/frequency/TRIENNIAL">
+    <skos:prefLabel xml:lang="en">Up to Triennial</skos:prefLabel>
+  </skos:Concept>
+
+  <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/frequency/QUADRENNIAL">
+    <skos:prefLabel xml:lang="en">Up to Quadrennial</skos:prefLabel>
+  </skos:Concept>
+
+  <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/frequency/QUINQUENNIAL">
+    <skos:prefLabel xml:lang="en">Up to Quinquennial</skos:prefLabel>
+  </skos:Concept>
+
+  <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/frequency/DECENNIAL">
+    <skos:prefLabel xml:lang="en">Up to Decennial</skos:prefLabel>
+  </skos:Concept>
+
+  <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/frequency/BIDECENNIAL">
+    <skos:prefLabel xml:lang="en">Up to Bidecennial</skos:prefLabel>
+  </skos:Concept>
+
+  <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/frequency/TRIDECENNIAL">
+    <skos:prefLabel xml:lang="en">Up to Tridecennial</skos:prefLabel>
+  </skos:Concept>
+
+  <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/frequency/UNKNOWN">
+    <skos:prefLabel xml:lang="en">Unknown</skos:prefLabel>
+  </skos:Concept>
+
+</rdf:RDF>

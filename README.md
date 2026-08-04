@@ -1,6 +1,6 @@
 # mobilityDCAT-AP Generator Tool
 
-Generate [mobilityDCAT-AP](https://w3id.org/mobilitydcat-ap/) metadata in RDF using a form-based interface. Test and experiment with different metadata to learn how different information are described according to the mobilityDCAT-AP specification. The form is compliant with the minimum profile of mobilityDCAT-AP.
+Generate [mobilityDCAT-AP](https://w3id.org/mobilitydcat-ap/) metadata in RDF using a form-based interface. Test and experiment with different metadata to learn how different information are described according to the mobilityDCAT-AP specification. The form is compliant with the minimum profile of mobilityDCAT-AP v1.1.0 and v3.0.0.
 
 ▶️ Visit the webpage at: https://mobilitydcat-ap.github.io/mobilitydcatap-ui/
 
