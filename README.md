@@ -25,3 +25,9 @@ Visit http://localhost:8080.
 Build the image locally and push the updated files in the `dist` folder using the `publish.sh` script.
 
 The scripts builds the interface using the Docker container, and copies the required files in the `dist` folder running an instance of the container.
+
+> Note:
+> `publish.sh` supports multiple commands:
+> - `./publish.sh publish`: build and refresh `dist`.
+> - `./publish.sh update-vocab`: download and refresh RDF vocabularies in `public/vocabularies`.
+> - `./publish.sh publish-with-vocab`: update vocabularies and then publish `dist`.
