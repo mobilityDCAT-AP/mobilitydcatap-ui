@@ -66,6 +66,29 @@
 
     <v-divider color="secondary" />
 
+    <v-container class="intro-copy" fluid>
+      <div class="intro-copy-content">
+        <div class="intro-copy-text">
+          <p>
+            Test and experiment to learn how different information should be described in RDF according to the
+            <a href="https://w3id.org/mobilitydcat-ap/" target="_blank" rel="noopener noreferrer">mobilityDCAT-AP</a> specification. Select in the top right between the versions available. The page is client-side only so all the information inserted are stored only in the browser. You can download and re-upload the data in JSON format to continue your work later.
+          </p>
+          <p>
+            This page is powered by <i>KCONG (Knowledge Catalogue and Governance)</i> a complete (meta)data
+            catalogue solution developed by <a href="https://www.cefriel.com/" target="_blank" rel="noopener noreferrer">Cefriel</a>.
+          </p>
+        </div>
+
+        <div class="intro-logo-box">
+          <img
+            :src="brand.logoUrl"
+            :alt="brand.appName"
+            class="intro-logo"
+          />
+        </div>
+      </div>
+    </v-container>
+
     <!-- Hidden file input -->
     <input
       ref="fileInput"
@@ -350,7 +373,7 @@ function onClear() {
 }
 
 .toolbar-select {
-  max-width: 160px;
+  max-width: 220px;
   margin-top: 6px;
   font-size: 0.8rem;
 }
@@ -380,6 +403,58 @@ function onClear() {
   margin-left: auto;
 }
 
+.intro-copy {
+  max-width: 1060px;
+  padding: 1rem 1rem 0.25rem;
+  margin: 0 auto;
+  color: #343a40;
+  line-height: 1.5;
+}
+
+.intro-copy-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.intro-copy-text {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-size: 0.9rem;
+}
+
+.intro-copy p {
+  margin-bottom: 0.75rem;
+}
+
+.intro-copy p:last-child {
+  margin-bottom: 0;
+}
+
+.intro-copy a {
+  color: rgb(var(--v-theme-primary));
+  text-decoration: underline;
+}
+
+.intro-logo-box {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid #e9ecef;
+}
+
+.intro-logo {
+  height: clamp(72px, 10vw, 120px);
+  max-width: 360px;
+  width: auto;
+  object-fit: contain;
+}
+
 .btn-text-desktop {
   display: inline;
 }
@@ -398,8 +473,9 @@ function onClear() {
   }
 
   .toolbar-select {
-    max-width: 130px;
-    margin-top: 6px;
+    min-width: 180px;
+    max-width: 220px;
+    margin-top: 4px;
   }
 
   .btn-text-desktop {
@@ -416,6 +492,23 @@ function onClear() {
 }
 
 @media (max-width: 960px) {
+  .intro-copy-content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .intro-logo-box {
+    align-self: center;
+    width: 100%;
+    max-width: 360px;
+  }
+
+  .intro-logo {
+    width: 100%;
+    height: auto;
+    max-height: 120px;
+  }
+
   .form-rdf-layout.with-rdf {
     flex-direction: column;
   }

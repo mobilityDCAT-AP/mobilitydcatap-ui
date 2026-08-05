@@ -1,13 +1,6 @@
 <template>
   <v-app>
     <v-app-bar color="primary" density="compact">
-      <div class="logo-box">
-        <img
-          :src="brand.logoUrl"
-          :alt="brand.appName"
-          class="app-logo"
-        />
-      </div>
       <v-app-bar-title>{{ brand.appName }}</v-app-bar-title>
     </v-app-bar>
 
@@ -37,36 +30,6 @@ h1, h2, h3, h4, h5, h6 {
 p, ul, ol {
   margin: 0;
   padding: 0;
-}
-
-.logo-box {
-  display: flex;
-  align-items: center;
-  padding: 0.5rem;
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 0.5rem;
-  border: 1px solid #e9ecef;
-  transition: all 0.2s ease;
-  margin-left: 18px;
-  margin-right: 0px;
-}
-
-.logo-box:hover {
-  background: #f8f9fa;
-  border-color: #d1d5db;
-  transform: translateY(-1px);
-}
-
-.app-logo {
-  height: 20px;
-  max-width: 80px;
-  object-fit: contain;
-  opacity: 0.8;
-  transition: opacity 0.2s ease;
-}
-
-.app-logo:hover {
-  opacity: 1;
 }
 
 /* Footer */
