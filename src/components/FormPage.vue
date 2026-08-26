@@ -112,6 +112,7 @@
               v-model="model"
               :schema="schema"
               :options="vjsfOptions"
+              @update:model-value="formDataHelper.onUserChange"
             />
           </v-form>
           <div v-else class="text-center pa-8">
