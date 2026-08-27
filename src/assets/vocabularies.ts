@@ -65,4 +65,16 @@ export const VOCABULARIES: VocabularySource[] = [
     lang: 'en',
     sources: ['/vocabularies/file-types.rdf'],
   },
+  {
+    id: 'language',
+    label: 'Language',
+    lang: 'en',
+    sources: ['/vocabularies/languages.rdf'],
+  },
+  {
+    id: 'conditions_access_usage',
+    label: 'Conditions of Access and Usage',
+    lang: 'en',
+    sources: ['/vocabularies/conditions-for-access-and-usage.rdf'],
+  },
 ]

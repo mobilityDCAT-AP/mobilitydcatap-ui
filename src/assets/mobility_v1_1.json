@@ -1,12 +1,6 @@
 ﻿{
   "type": "object",
   "properties": {
-    "identifier": {
-      "type": "string",
-      "title": "Identifier",
-      "description": "Identifier of the data source.",
-      "default": "MY_DATASOURCE"
-    },
     "name": {
       "type": "string",
       "title": "Name",
@@ -24,16 +18,7 @@
       "type": "string",
       "title": "Publisher name",
       "description": "Name of the entity providing the data source",
-      "default": "Cefriel Data Publisher",
-      "layout": { "cols": 6 }
-    },
-    "publisher_email": {
-      "title": "Publisher email",
-      "type": "string",
-      "format": "email",
-      "description": "Email of the entity providing the data source",
-      "default": "no-reply@cefriel.com",
-      "layout": { "cols": 6 }
+      "default": "Cefriel Data Publisher"
     },
     "id": {
       "type": "string",
@@ -57,7 +42,7 @@
     },
     "mobility_theme_category": {
       "title": "Mobility theme category",
-      "description": "Categories describing the data in the data source. Select from the <a href='https://w3id.org/mobilitydcat-ap/mobility-theme' target='_blank' rel='noopener noreferrer'>mobilitydcatap:mobilityTheme</a> vocabulary.",
+      "description": "Categories describing the data in the data source. Select from the <a href='https://w3id.org/mobilitydcat-ap/mobility-theme' target='_blank' rel='noopener noreferrer'>mobilitydcatap:mobility-theme</a> vocabulary.",
       "type": "array",
       "minItems": 1,
       "errorMessage": {
@@ -79,7 +64,7 @@
     },
     "mobility_theme_subcategory": {
       "title": "Mobility theme subcategory",
-      "description": "Subcategories associated with the selected categories. Select from the <a href='https://w3id.org/mobilitydcat-ap/mobility-theme' target='_blank' rel='noopener noreferrer'>mobilitydcatap:mobilityTheme</a> vocabulary.",
+      "description": "Subcategories associated with the selected categories. Select from the <a href='https://w3id.org/mobilitydcat-ap/mobility-theme' target='_blank' rel='noopener noreferrer'>mobilitydcatap:mobility-theme</a> vocabulary.",
       "type": "array",
       "items": {
         "type": "string"
@@ -100,12 +85,34 @@
     },
     "accrual_periodicity": {
       "title": "Accrual periodicity",
-      "description": "How often the content of the data source is updated. Uses the EU Publications Office frequency authority vocabulary.",
+      "description": "How often the content of the data source is updated. Select from the <a href='http://publications.europa.eu/resource/authority/frequency' target='_blank' rel='noopener noreferrer'>EU Publications Office frequency authority</a> vocabulary.",
       "type": "string",
       "layout": {
         "comp": "combobox",
         "getItems": {
           "expr": "context.vocabularies.accrual_periodicity",
+          "itemsResults": "data",
+          "itemTitle": "data.label",
+          "itemValue": "data.label",
+          "itemKey": "data.iri"
+        }
+      }
+    },
+    "language": {
+      "title": "Language",
+      "description": "Languages of the data in the data source. Select from the <a href='http://publications.europa.eu/resource/authority/language' target='_blank' rel='noopener noreferrer'>EU Publications Office language authority</a> vocabulary.",
+      "type": "array",
+      "minItems": 1,
+      "errorMessage": {
+        "minItems": "Select at least one value"
+      },
+      "items": {
+        "type": "string"
+      },
+      "layout": {
+        "comp": "combobox",
+        "getItems": {
+          "expr": "context.vocabularies.language",
           "itemsResults": "data",
           "itemTitle": "data.label",
           "itemValue": "data.label",
@@ -128,7 +135,7 @@
         "properties": {
           "data_schema": {
             "title": "Data schema/model",
-            "description": "The data schema/model adopted to represent the data. Select from the mobilitydcatap:mobilityDataStandard vocabulary.",
+            "description": "The data schema/model adopted to represent the data. Select from the <a href='https://w3id.org/mobilitydcat-ap/mobility-data-standard' target='_blank' rel='noopener noreferrer'>mobilitydcatap:mobilityDataStandard</a> vocabulary.",
             "type": "string",
             "layout": {
               "comp": "combobox",
@@ -144,11 +151,26 @@
           "format": {
             "type": "string",
             "title": "Resource format",
-            "description": "The format used to encode the data. Uses the EU Publications Office file-type authority vocabulary.",
+            "description": "The format used to encode the data. Select from the <a href='http://publications.europa.eu/resource/authority/file-type' target='_blank' rel='noopener noreferrer'>EU Publications Office file-type authority</a> vocabulary.",
             "layout": {
               "comp": "combobox",
               "getItems": {
                 "expr": "context.vocabularies.file_type",
+                "itemsResults": "data",
+                "itemTitle": "data.label",
+                "itemValue": "data.label",
+                "itemKey": "data.iri"
+              }
+            }
+          },
+          "rights": {
+            "title": "Rights",
+            "description": "The rights associated with the data. Select from the <a href='https://w3id.org/mobilitydcat-ap/conditions-for-access-and-usage' target='_blank' rel='noopener noreferrer'>mobilitydcatap:conditions-for-access-and-usage</a> vocabulary.",
+            "type": "string",
+            "layout": {
+              "comp": "combobox",
+              "getItems": {
+                "expr": "context.vocabularies.conditions_access_usage",
                 "itemsResults": "data",
                 "itemTitle": "data.label",
                 "itemValue": "data.label",

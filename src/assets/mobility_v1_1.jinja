@@ -24,32 +24,45 @@ dcterms:description "Cefriel RDF Metadata Generator for mobilityDCAT-AP powered 
 dcterms:publisher [
     rdf:type foaf:Agent;
     foaf:name "Mobility Data Publisher";
-    foaf:mbox "no-reply@cefriel.com";
 ];
 dcterms:dataset {{asset_id | safe}};
 dcat:record {{catalogue_record_id | safe}};
+
+{%if '://' in json_content.spatial_coverage %}
+dcterms:spatial <{{json_content.spatial_coverage}}>;
+{%else%}
+dcterms:spatial """{{json_content.spatial_coverage}}""";
+{%endif%}
+
+{%if json_content.spatial_aggregation%}
+dcat:spatialResolutionInMeters """{{json_content.spatial_aggregation}}""";
+{%endif%}
+
 foaf:homepage <https://kcong.cefriel.com/>.
 
 
 {{catalogue_record_id | safe}} rdf:type dcat:CatalogRecord ;
-dcterms:identifier "{{obj.id}}" ;
+# dcterms:identifier "{{obj.id}}" ;
 dcterms:modified "{{obj.modified}}"^^xsd:dateTime ;
 dcterms:created "{{obj.created}}"^^xsd:dateTime ;
+{%- set languages = json_content.language if json_content.language else [] -%}
+{%- for lang in languages -%}
+{%- set lang_iri = vocab_map.language[lang] if lang and '://' not in lang else lang -%}
+{%- if lang_iri %}
+dcterms:language <{{lang_iri}}>;
+{%- endif -%}
+{%- endfor %}
 foaf:primaryTopic {{asset_id  | safe}} .
 
 
 {{asset_id | safe}}
-    dcterms:identifier """{{dcat_content.identifier}}""";
     dcterms:title "{{dcat_content.name}}";
     dcterms:description """{{dcat_content.description}}""";
-    {%if dcat_content.publisher_name or dcat_content.publisher_email %}
+    {%if dcat_content.publisher_name %}
     dcterms:publisher [
     rdf:type foaf:Agent;
       {%if dcat_content.publisher_name %}
     foaf:name "{{dcat_content.publisher_name}}";
-      {%endif%}
-      {%if dcat_content.publisher_email %}
-    foaf:mbox "{{dcat_content.publisher_email}}";
       {%endif%}
     ];
     {%endif%}
@@ -70,9 +83,9 @@ foaf:primaryTopic {{asset_id  | safe}} .
     {%- endfor -%}
 
     {%if '://' in json_content.spatial_coverage %}
-    dcat:spatial <{{json_content.spatial_coverage}}>;
+    dcterms:spatial <{{json_content.spatial_coverage}}>;
     {%else%}
-    dcat:spatial """{{json_content.spatial_coverage}}""";
+    dcterms:spatial """{{json_content.spatial_coverage}}""";
     {%endif%}
 
     {%if json_content.spatial_aggregation%}
@@ -100,7 +113,7 @@ foaf:primaryTopic {{asset_id  | safe}} .
 
     {%- set accrual_periodicity_iri = vocab_map.accrual_periodicity[json_content.accrual_periodicity] if json_content.accrual_periodicity and '://' not in json_content.accrual_periodicity else json_content.accrual_periodicity -%}
     {%- if accrual_periodicity_iri %}
-    dcat:accrualPeriodicity <{{accrual_periodicity_iri}}>.
+    dcat:accrualPeriodicity <{{accrual_periodicity_iri}}>;
     {%- endif %}
 
     rdf:type dcat:Dataset .
@@ -121,6 +134,13 @@ foaf:primaryTopic {{asset_id  | safe}} .
     dcterms:format <{{format_iri}}>;
     {%- elif format_iri %}
     dcterms:format "{{format_iri}}";
+    {%- endif %}
+    {%- set rights_iri = vocab_map.conditions_access_usage[distribution.rights] if distribution.rights and '://' not in distribution.rights else distribution.rights -%}
+    {%- if rights_iri %}
+    dcterms:rights [
+        a dcterms:RightsStatement ;
+        dcterms:type <{{rights_iri}}>
+    ] ;
     {%- endif %}
   {%-if json_content.data_sample -%}
     {%- for sample in json_content.data_sample -%}
