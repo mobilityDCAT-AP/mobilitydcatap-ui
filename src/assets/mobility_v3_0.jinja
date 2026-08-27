@@ -40,7 +40,7 @@ foaf:homepage <https://kcong.cefriel.com/>.
 {{catalogue_record_id | safe}} rdf:type dcat:CatalogRecord ;
 # dcterms:identifier "{{obj.id}}" ;
 dcterms:modified "{{obj.modified}}"^^xsd:dateTime ;
-dcterms:created "{{obj.created}}"^^xsd:dateTime ;
+dcterms:issued "{{obj.created}}"^^xsd:dateTime ;
 {%- set languages = json_content.language if json_content.language else [] -%}
 {%- for lang in languages -%}
 {%- set lang_iri = vocab_map.language[lang] if lang and '://' not in lang else lang -%}
@@ -58,7 +58,7 @@ foaf:primaryTopic {{asset_id  | safe}} .
     dcterms:publisher [
     rdf:type foaf:Agent;
       {%if dcat_content.publisher_name %}
-    foaf:name "{{dcat_content.publisher_name}}";
+      foaf:name "{{dcat_content.publisher_name}}";
       {%endif%}
     ];
     {%endif%}
@@ -83,29 +83,6 @@ foaf:primaryTopic {{asset_id  | safe}} .
     {%else%}
     dcterms:spatial """{{json_content.spatial_coverage}}""";
     {%endif%}
-
-    {%if json_content.spatial_aggregation%}
-    dcat:spatialResolutionInMeters """{{json_content.spatial_aggregation}}""";
-    {%endif%}
-
-    {%if json_content.temporal_coverage_start or json_content.temporal_coverage_end%}
-    dcat:temporal [ a dcterms:PeriodOfTime;
-      {%if json_content.temporal_coverage_start%}
-    dcat:startDate """{{json_content.temporal_coverage_start}}""";
-      {%endif%}
-      {%if json_content.temporal_coverage_end%}
-    dcat:endDate """{{json_content.temporal_coverage_end}}""";
-      {%endif%}
-    ];
-    {%endif%}
-
-    {%if json_content.temporal_aggregation%}
-    dcat:temporalResolution """{{json_content.temporal_aggregation}}""";
-    {%endif%}
-
-    {%- if json_content.source_asset and json_content.source_asset.id -%}
-    dcterms:source <{{json_content.source_asset.id}}>;
-    {%- endif -%}
 
     {%- set accrual_periodicity_iri = vocab_map.accrual_periodicity[json_content.accrual_periodicity] if json_content.accrual_periodicity and '://' not in json_content.accrual_periodicity else json_content.accrual_periodicity -%}
     {%- if accrual_periodicity_iri %}

@@ -17,8 +17,8 @@ const formsRegistry: Record<string, FormConfig> = {
   mobility_v3_0: {
     label: 'v3.0 (mandatory)',
     rdfClass: 'Dataset',
-    schema: () => import('./mobility_v1_1.json').then((m) => m.default as Record<string, unknown>),
-    template: () => import('./mobility_v1_1.jinja?raw').then((m) => m.default),
+    schema: () => import('./mobility_v3_0.json').then((m) => m.default as Record<string, unknown>),
+    template: () => import('./mobility_v3_0.jinja?raw').then((m) => m.default),
     templateFormat: 'text/turtle',
   }
 }
