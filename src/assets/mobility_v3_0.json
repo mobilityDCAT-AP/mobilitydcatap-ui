@@ -4,20 +4,20 @@
     "name": {
       "type": "string",
       "title": "Name",
-      "description": "Name of the data source",
+      "description": "The name given to the dataset in a generic term. The name should be a meaningful, unique and unambiguous label. This property can be repeated for parallel language versions of the title.",
       "default": "My Data Source"
     },
     "description": {
       "type": "string",
       "title": "Description",
       "layout": "textarea",
-      "description": "Description of the data contained in the data source",
+      "description": "Information about the dataset as a free-text description. It is used only for a brief overview. This property can be repeated for parallel language versions of the description.",
       "default": "My Data Source contains mobility data about mobility things."
     },
     "publisher_name": {
       "type": "string",
       "title": "Publisher name",
-      "description": "Name of the entity providing the data source",
+      "description": "An entity (company and person) that publishes the dataset. This entity is responsible for the provisioning of a dataset. The entity also concludes a contract, if applicable.",
       "default": "Cefriel Data Publisher"
     },
     "id": {
@@ -25,7 +25,7 @@
       "title": "ID",
       "readOnly": true
     },
-    "created": {
+    "issued": {
       "type": "string",
       "title": "Creation date",
       "readOnly": true
@@ -42,7 +42,7 @@
     },
     "mobility_theme_category": {
       "title": "Mobility theme category",
-      "description": "Categories describing the data in the data source. Select from the <a href='https://w3id.org/mobilitydcat-ap/mobility-theme' target='_blank' rel='noopener noreferrer'>mobilitydcatap:mobility-theme</a> vocabulary.",
+      "description": "Mobility-related theme categories (i.e., a specific subject, category, or type) of the delivered content. A dataset may be associated with multiple themes. A theme is important for data seekers who are interested in a particular type of data content. The theme is described via the <a href='https://w3id.org/mobilitydcat-ap/mobility-theme' target='_blank' rel='noopener noreferrer'>mobilitydcatap:mobility-theme</a> vocabulary in two hierarchy levels: this is the 1st level describing the classification of the data content on an aggregated level.",
       "type": "array",
       "minItems": 1,
       "errorMessage": {
@@ -64,7 +64,7 @@
     },
     "mobility_theme_subcategory": {
       "title": "Mobility theme subcategory",
-      "description": "Subcategories associated with the selected categories. Select from the <a href='https://w3id.org/mobilitydcat-ap/mobility-theme' target='_blank' rel='noopener noreferrer'>mobilitydcatap:mobility-theme</a> vocabulary.",
+      "description": "Mobility-related theme sub-categories (i.e., a specific subject, category, or type) of the delivered content, The theme is described via the <a href='https://w3id.org/mobilitydcat-ap/mobility-theme' target='_blank' rel='noopener noreferrer'>mobilitydcatap:mobility-theme</a> vocabulary in two hierarchy levels: this is the 2nd level, an optional field detailing the category previously entered via one or several sub-categories.",
       "type": "array",
       "items": {
         "type": "string"

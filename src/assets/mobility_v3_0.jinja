@@ -40,7 +40,7 @@ foaf:homepage <https://kcong.cefriel.com/>.
 {{catalogue_record_id | safe}} rdf:type dcat:CatalogRecord ;
 # dcterms:identifier "{{obj.id}}" ;
 dcterms:modified "{{obj.modified}}"^^xsd:dateTime ;
-dcterms:issued "{{obj.created}}"^^xsd:dateTime ;
+dcterms:issued "{{obj.issued}}"^^xsd:dateTime ;
 {%- set languages = json_content.language if json_content.language else [] -%}
 {%- for lang in languages -%}
 {%- set lang_iri = vocab_map.language[lang] if lang and '://' not in lang else lang -%}
