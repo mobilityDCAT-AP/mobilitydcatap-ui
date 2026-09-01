@@ -28,11 +28,7 @@ dcterms:publisher [
 dcterms:dataset {{asset_id | safe}};
 dcat:record {{catalogue_record_id | safe}};
 
-{%if '://' in json_content.spatial_coverage %}
-dcterms:spatial <{{json_content.spatial_coverage}}>;
-{%else%}
-dcterms:spatial """{{json_content.spatial_coverage}}""";
-{%endif%}
+dcterms:spatial <http://publications.europa.eu/resource/authority/continent/EUROPE>;
 
 foaf:homepage <https://kcong.cefriel.com/>.
 

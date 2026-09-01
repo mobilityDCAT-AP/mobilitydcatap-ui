@@ -1,6 +1,29 @@
 ﻿{
   "type": "object",
   "properties": {
+    "language": {
+      "title": "Metadata language",
+      "description": "Languages of the metadata of the data source. Select from the <a href='https://op.europa.eu/en/web/eu-vocabularies/dataset/-/resource?uri=http://publications.europa.eu/resource/dataset/language' target='_blank' rel='noopener noreferrer'>EU Publications Office language authority</a> vocabulary.",
+      "type": "array",
+      "minItems": 1,
+      "default": ["http://publications.europa.eu/resource/authority/language/ENG"],
+      "errorMessage": {
+        "minItems": "Select at least one value"
+      },
+      "items": {
+        "type": "string"
+      },
+      "layout": {
+        "comp": "combobox",
+        "getItems": {
+          "expr": "context.vocabularies.language",
+          "itemsResults": "data",
+          "itemTitle": "data.label",
+          "itemValue": "data.label",
+          "itemKey": "data.iri"
+        }
+      }
+    },
     "name": {
       "type": "string",
       "title": "Name",
@@ -91,28 +114,6 @@
         "comp": "combobox",
         "getItems": {
           "expr": "context.vocabularies.accrual_periodicity",
-          "itemsResults": "data",
-          "itemTitle": "data.label",
-          "itemValue": "data.label",
-          "itemKey": "data.iri"
-        }
-      }
-    },
-    "language": {
-      "title": "Language",
-      "description": "Languages of the data in the data source. Select from the <a href='http://publications.europa.eu/resource/authority/language' target='_blank' rel='noopener noreferrer'>EU Publications Office language authority</a> vocabulary.",
-      "type": "array",
-      "minItems": 1,
-      "errorMessage": {
-        "minItems": "Select at least one value"
-      },
-      "items": {
-        "type": "string"
-      },
-      "layout": {
-        "comp": "combobox",
-        "getItems": {
-          "expr": "context.vocabularies.language",
           "itemsResults": "data",
           "itemTitle": "data.label",
           "itemValue": "data.label",
