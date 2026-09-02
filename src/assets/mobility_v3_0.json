@@ -1,17 +1,40 @@
 ﻿{
   "type": "object",
   "properties": {
+    "language": {
+      "title": "Metadata language",
+      "description": "Languages of the metadata of the data source. Select from the <a href='https://op.europa.eu/en/web/eu-vocabularies/dataset/-/resource?uri=http://publications.europa.eu/resource/dataset/language' target='_blank' rel='noopener noreferrer'>EU Publications Office language authority</a> vocabulary.",
+      "type": "array",
+      "minItems": 1,
+      "default": ["http://publications.europa.eu/resource/authority/language/ENG"],
+      "errorMessage": {
+        "minItems": "Select at least one value"
+      },
+      "items": {
+        "type": "string"
+      },
+      "layout": {
+        "comp": "combobox",
+        "getItems": {
+          "expr": "context.vocabularies.language",
+          "itemsResults": "data",
+          "itemTitle": "data.label",
+          "itemValue": "data.label",
+          "itemKey": "data.iri"
+        }
+      }
+    },
     "name": {
       "type": "string",
       "title": "Name",
-      "description": "The name given to the dataset in a generic term. The name should be a meaningful, unique and unambiguous label. This property can be repeated for parallel language versions of the title.",
+      "description": "The name given to the dataset in a generic term. The name should be a meaningful, unique and unambiguous label.",
       "default": "My Data Source"
     },
     "description": {
       "type": "string",
       "title": "Description",
       "layout": "textarea",
-      "description": "Information about the dataset as a free-text description. It is used only for a brief overview. This property can be repeated for parallel language versions of the description.",
+      "description": "Information about the dataset as a free-text description. It is used only for a brief overview.",
       "default": "My Data Source contains mobility data about mobility things."
     },
     "publisher_name": {
@@ -85,7 +108,7 @@
     },
     "accrual_periodicity": {
       "title": "Accrual periodicity",
-      "description": "How often the content of the data source is updated. Select from the <a href='https://op.europa.eu/en/web/eu-vocabularies/dataset/-/resource?uri=http://publications.europa.eu/resource/dataset/frequency' target='_blank' rel='noopener noreferrer'>EU Publications Office frequency authority</a> vocabulary.",
+      "description": "How often the delivered content is updated. This information tells a data consumer how often it is updated on the data platform, so the data consumer might align the frequency of data retrieval accordingly. For dynamic data feeds, the frequency should correspond to the technical upload / data push frequency. For static datasets, it should correspond to the expected change frequency. Select from the <a href='https://op.europa.eu/en/web/eu-vocabularies/dataset/-/resource?uri=http://publications.europa.eu/resource/dataset/frequency' target='_blank' rel='noopener noreferrer'>EU Publications Office frequency authority</a> vocabulary.",
       "type": "string",
       "layout": {
         "comp": "combobox",
@@ -98,45 +121,33 @@
         }
       }
     },
-    "language": {
-      "title": "Language",
-      "description": "Languages of the data in the data source. Select from the <a href='https://op.europa.eu/en/web/eu-vocabularies/dataset/-/resource?uri=http://publications.europa.eu/resource/dataset/language' target='_blank' rel='noopener noreferrer'>EU Publications Office language authority</a> vocabulary.",
+    "spatial_coverage": {
       "type": "array",
-      "minItems": 1,
-      "errorMessage": {
-        "minItems": "Select at least one value"
-      },
+      "default": ["http://publications.europa.eu/resource/authority/country/ITA"],
+      "description": "A geographic region that is covered by the delivered content. It can be represented via a geocode (= a named place) or with geographic coordinates. For mobility data portals, usage of geocodes is preferred. As geocodes, IRIs from predefined controlled vocabularies should be used, such as the <a href='https://op.europa.eu/en/web/eu-vocabularies/dataset/-/resource?uri=http://publications.europa.eu/resource/dataset/continent' target='_blank' rel='noopener noreferrer'>EU Authority Table \"Continent\"</a>, the <a href='https://op.europa.eu/en/web/eu-vocabularies/dataset/-/resource?uri=http://publications.europa.eu/resource/dataset/country' target='_blank' rel='noopener noreferrer'>EU Authority Table \"Countries and territories\"</a>, the <a href='https://op.europa.eu/en/web/eu-vocabularies/dataset/-/resource?uri=http://publications.europa.eu/resource/dataset/place' target='_blank' rel='noopener noreferrer'>EU Authority Table \"Places\"</a>, the <a href='http://sws.geonames.org/' target='_blank' rel='noopener noreferrer'>GeoNames geographical database</a>, the <a href='https://op.europa.eu/en/web/eu-vocabularies/dataset/-/resource?uri=http://publications.europa.eu/resource/dataset/nuts' target='_blank' rel='noopener noreferrer'>EU Taxonomy \"Nomenclature of Territorial Units for Statistics\" (NUTS)</a>.",
+      "title": "Area covered",
       "items": {
         "type": "string"
       },
       "layout": {
-        "comp": "combobox",
-        "getItems": {
-          "expr": "context.vocabularies.language",
-          "itemsResults": "data",
-          "itemTitle": "data.label",
-          "itemValue": "data.label",
-          "itemKey": "data.iri"
-        }
+        "comp": "combobox"
       }
-    },
-    "spatial_coverage": {
-      "type": "string",
-      "default": "http://publications.europa.eu/resource/authority/country/ITA",
-      "description": "The geographical coverage of the data in the data source (IRI or free text).",
-      "title": "Area covered"
     },
     "distributions": {
       "title": "Distributions",
-      "description": "A specific representation of the dataset (dcat:Distribution).",
+      "description": "A distribution describes the data formats and communication methods for a dataset. There may be one or multiple distributions for one dataset. For example, the same dataset (e.g. static parking information for truck drivers) can be provided in different ways e.g. as downloadable zip file or as XML using a REST web service. These are two distributions based on one dataset.",
       "type": "array",
       "items": {
         "type": "object",
         "properties": {
           "data_schema": {
             "title": "Data schema/model",
-            "description": "The data schema/model adopted to represent the data. Select from the <a href='https://w3id.org/mobilitydcat-ap/mobility-data-standard' target='_blank' rel='noopener noreferrer'>mobilitydcatap:mobilityDataStandard</a> vocabulary.",
-            "type": "string",
+            "description": "The mobility data standard, as applied for the delivered content within the distribution. A mobility data standard, e.g., DATEX II, combines syntax and semantic definitions of entities in a certain domain (e.g., for DATEX II: road traffic information), and optionally adds technical rules for data exchange. Select from the <a href='https://w3id.org/mobilitydcat-ap/mobility-data-standard' target='_blank' rel='noopener noreferrer'>mobilitydcatap:mobilityDataStandard</a> vocabulary.  If no suitable standard is found in this vocabulary, the \"other\" entry should be used.",
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string"
+            },
             "layout": {
               "comp": "combobox",
               "getItems": {
@@ -151,7 +162,7 @@
           "format": {
             "type": "string",
             "title": "Resource format",
-            "description": "The format used to encode the data. Select from the <a href='https://op.europa.eu/en/web/eu-vocabularies/dataset/-/resource?uri=http://publications.europa.eu/resource/dataset/file-type' target='_blank' rel='noopener noreferrer'>EU Publications Office file-type authority</a> vocabulary.",
+            "description": "The technical syntax of the delivered content within the distribution. It describes the base standard that specifies syntactically correct documents. On this level, base elements are properly specified on how to build a document. The resulting document can then be validated by syntax checks. Select from the <a href='https://op.europa.eu/en/web/eu-vocabularies/dataset/-/resource?uri=http://publications.europa.eu/resource/dataset/file-type' target='_blank' rel='noopener noreferrer'>EU Publications Office file-type authority</a> vocabulary.",
             "layout": {
               "comp": "combobox",
               "getItems": {
@@ -166,7 +177,10 @@
           "rights": {
             "title": "Rights",
             "description": "The rights associated with the data. Select from the <a href='https://w3id.org/mobilitydcat-ap/conditions-for-access-and-usage' target='_blank' rel='noopener noreferrer'>mobilitydcatap:conditions-for-access-and-usage</a> vocabulary.",
-            "type": "string",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
             "layout": {
               "comp": "combobox",
               "getItems": {
@@ -181,7 +195,7 @@
           "access_url": {
             "type": "string",
             "title": "Access URL",
-            "description": "URL redirecting to a webpage or an endpoint to access the data.",
+            "description": "A URL that gives access to a distribution of the dataset. Depending on the type of data provision, there are different options for describing the URL. For data services, e.g., API, broker services, data feeds, etc., the URL may be the end point of such service. If some agreements between the data provider and the data user need to be established first, the access URL may link to web page, where the access is further arranged, e.g., initiating a subscription process. For data which can be downloaded directly, the URL should be a direct link to a downloadable file in a given format. For other cases, where data cannot be directly accessed or downloaded via the platform, the access URL may be a link to an external service or a website which enables access to the data.",
             "default": "http://www.cefriel.com/data/my_data_source"
           }
         }

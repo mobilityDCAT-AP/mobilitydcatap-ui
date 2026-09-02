@@ -28,11 +28,7 @@ dcterms:publisher [
 dcterms:dataset {{asset_id | safe}};
 dcat:record {{catalogue_record_id | safe}};
 
-{%if '://' in json_content.spatial_coverage %}
-dcterms:spatial <{{json_content.spatial_coverage}}>;
-{%else%}
-dcterms:spatial """{{json_content.spatial_coverage}}""";
-{%endif%}
+dcterms:spatial <http://publications.europa.eu/resource/authority/continent/EUROPE>;
 
 foaf:homepage <https://kcong.cefriel.com/>.
 
@@ -78,11 +74,21 @@ foaf:primaryTopic {{asset_id  | safe}} .
     {%- endif -%}
     {%- endfor -%}
 
-    {%if '://' in json_content.spatial_coverage %}
-    dcterms:spatial <{{json_content.spatial_coverage}}>;
+    {%- if json_content.spatial_coverage is string -%}
+    {%- set spatial_coverages = [json_content.spatial_coverage] -%}
+    {%- elif json_content.spatial_coverage -%}
+    {%- set spatial_coverages = json_content.spatial_coverage -%}
+    {%- else -%}
+    {%- set spatial_coverages = [] -%}
+    {%- endif -%}
+
+    {%- for spatial_coverage in spatial_coverages -%}
+    {%if '://' in spatial_coverage %}
+    dcterms:spatial <{{spatial_coverage}}>;
     {%else%}
-    dcterms:spatial """{{json_content.spatial_coverage}}""";
+    dcterms:spatial """{{spatial_coverage}}""";
     {%endif%}
+    {%- endfor -%}
 
     {%- set accrual_periodicity_iri = vocab_map.accrual_periodicity[json_content.accrual_periodicity] if json_content.accrual_periodicity and '://' not in json_content.accrual_periodicity else json_content.accrual_periodicity -%}
     {%- if accrual_periodicity_iri %}
@@ -98,23 +104,41 @@ foaf:primaryTopic {{asset_id  | safe}} .
   {{asset_id | safe}} dcat:distribution {{distribution_id | safe}} .
 
   {{distribution_id | safe}} rdf:type dcat:Distribution;
-    {%- set data_schema_iri = vocab_map.mobility_data_standard[distribution.data_schema] if distribution.data_schema and '://' not in distribution.data_schema else distribution.data_schema -%}
+    {%- if distribution.data_schema is string -%}
+    {%- set data_schemas = [distribution.data_schema] -%}
+    {%- elif distribution.data_schema -%}
+    {%- set data_schemas = distribution.data_schema -%}
+    {%- else -%}
+    {%- set data_schemas = [] -%}
+    {%- endif -%}
+    {%- for data_schema in data_schemas -%}
+    {%- set data_schema_iri = vocab_map.mobility_data_standard[data_schema] if data_schema and '://' not in data_schema else data_schema -%}
     {%- if data_schema_iri %}
     mobilitydcatap:mobilityDataStandard <{{data_schema_iri}}> ;
     {%- endif %}
+    {%- endfor -%}
     {%- set format_iri = vocab_map.file_type[distribution.format] if distribution.format and '://' not in distribution.format else distribution.format -%}
     {%- if format_iri and '://' in format_iri %}
     dcterms:format <{{format_iri}}>;
     {%- elif format_iri %}
     dcterms:format "{{format_iri}}";
     {%- endif %}
-    {%- set rights_iri = vocab_map.conditions_access_usage[distribution.rights] if distribution.rights and '://' not in distribution.rights else distribution.rights -%}
+    {%- if distribution.rights is string -%}
+    {%- set rights_values = [distribution.rights] -%}
+    {%- elif distribution.rights -%}
+    {%- set rights_values = distribution.rights -%}
+    {%- else -%}
+    {%- set rights_values = [] -%}
+    {%- endif -%}
+    {%- for rights_value in rights_values -%}
+    {%- set rights_iri = vocab_map.conditions_access_usage[rights_value] if rights_value and '://' not in rights_value else rights_value -%}
     {%- if rights_iri %}
     dcterms:rights [
         a dcterms:RightsStatement ;
         dcterms:type <{{rights_iri}}>
     ] ;
     {%- endif %}
+    {%- endfor -%}
   {%-if json_content.data_sample -%}
     {%- for sample in json_content.data_sample -%}
     adms:sample [
